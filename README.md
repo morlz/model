@@ -10,7 +10,7 @@ import Vue from 'vue'
 BaseModel.Vue = Vue
 
 export default class MyModel extends BaseModel {
-	constructor (args) {
+	constructor (args = {}) {
 		super()
 		this.define({
 			props: [ChildModel]

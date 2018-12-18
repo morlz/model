@@ -1,7 +1,8 @@
 {
 	"name": "@morlz/model",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "./dist/model.min.umd.js",
+	"private": false,
 	"keywords": [
 		"vue",
 		"model",
@@ -18,9 +19,7 @@
 		"dev": "parcel ./src/index.html --out-dir serve",
 		"build": "microbundle --entry ./src/index.js --target browser --format umd --name @morlz/model"
 	},
-	"dependencies": {
-
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/plugin-proposal-class-properties": "^7.2.1",
 		"@babel/core": "^7.0.0-0",
