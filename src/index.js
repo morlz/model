@@ -382,27 +382,33 @@ class BaseModel {
 	 */
 
 	toObject () {
-		let props = Object
-			.keys(this.__props__),
-			pref = new RegExp('^' + this.constructor.prefix, 'g')
+ 		let props = Object.keys(this.__props__),
+ 			pref = new RegExp('^' + prefix, 'g')
 
-		for (let prop in this)
-			if (
-				!props.includes(prop.replace(pref, ''))
-				&& !this.constructor.__private__.includes(prop)
-			) props.push(prop)
+ 		for (let prop in this)
+ 			if (
+ 				!props.includes(prop.replace(pref, ''))
+ 				&& !this.constructor.__private__.includes(prop)
+ 			) props.push(prop)
 
-		return props.reduce(
-			(acc, el) =>
-			(
-				acc[el] = this[el] instanceof BaseModel ?
-					this[el].toObject()
-				:	this[el],
-				acc
-			),
-			{}
-		)
-	}
+ 		const toObjectChidls = (acc, el) => {
+ 			if (this[el] instanceof BaseModel)
+ 				acc[el] = this[el].toObject()
+ 			else if (Array.isArray(this[el]))
+ 				acc[el] = this[el].map(
+ 					item =>
+ 					item instanceof BaseModel ?
+ 						item.toObject()
+ 					:	item
+ 				)
+ 			else
+ 				acc[el] = this[el]
+
+ 			return acc
+ 		}
+
+ 		return props.reduce(toObjectChidls, {})
+ 	}
 
 	/**
 	 * Private props
