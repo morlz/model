@@ -383,7 +383,7 @@ class BaseModel {
 
 	toObject () {
  		let props = Object.keys(this.__props__),
- 			pref = new RegExp('^' + prefix, 'g')
+ 			pref = new RegExp('^' + this.constructor.prefix, 'g')
 
  		for (let prop in this)
  			if (
