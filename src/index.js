@@ -389,6 +389,7 @@ class BaseModel {
  			if (
  				!props.includes(prop.replace(pref, ''))
  				&& !this.constructor.__private__.includes(prop)
+				&& typeof this[prop] !== 'function'
  			) props.push(prop)
 
  		const toObjectChidls = (acc, el) => {
